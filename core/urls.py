@@ -1,10 +1,12 @@
 from django.conf.urls import url
 from .views import (IndexView, DirectorMessageView, VisionAndMissionView, EstablishmentView, StructureView, SyllabusView,
-                    SyllabusView, BookAndAuthorsView, UnitWiseNotesView, VideoLecturesView, UnitWisePPTView, UTQuestionPaperView, 
+                    SyllabusView, BookAndAuthors_level1_View,BookAndAuthors_level2_View, UnitWiseNotes_level1_View,UnitWiseNotes_level2_View ,
+                    VideoLectures_level1_View,VideoLectures_level2_View, UnitWisePPT_level1_View, UnitWisePPT_level2_View, UTQuestionPaper_level1_View,
+                    UTQuestionPaper_level2_View,
                     FDPView, StudentsWorkshopView, EventsView, ClubsView,
                     ImpactStudentView, ImpactFacultyView, SaveContactView,Developer_View,Nature_Club_About,
                     Nature_Club_Activity, Health_Club_About, Health_Club_Activity, Event_Page,
-                    Sharing_Of_FacultyMembers,Sharing_Of_Students,AluminiSharing,)
+                    Sharing_Of_FacultyMembers,Sharing_Of_Students,AluminiSharing)
                     
 
 urlpatterns = [
@@ -13,11 +15,16 @@ urlpatterns = [
     url(r'^establishment/$', EstablishmentView.as_view(), name='establishment'),
     url(r'^structure/$', StructureView.as_view(), name='structure'),
     url(r'^syllabus/$', SyllabusView.as_view(), name='syllabus'),
-    url(r'^book-and-authors/$', BookAndAuthorsView.as_view(), name='book-and-authors'),
-    url(r'^unit-wise-notes/$', UnitWiseNotesView.as_view(), name='unit-wise-notes'),
-    url(r'^video-lectures/$', VideoLecturesView.as_view(), name='video-lectures'),
-    url(r'^unit-wise-ppt/$', UnitWisePPTView.as_view(), name='unit-wise-ppt'),
-    url(r'^UT-question-paper/$', UTQuestionPaperView.as_view(), name='UT-question-paper'),
+    url(r'^book-and-authors-level1/$', BookAndAuthors_level1_View.as_view(), name='book-and-authors-level1'),
+    url(r'^book-and-authors-level2/$', BookAndAuthors_level2_View.as_view(), name='book-and-authors-level2'),
+    url(r'^unit-wise-notes-level1/$', UnitWiseNotes_level1_View.as_view(), name='unit-wise-notes-level1'),
+    url(r'^unit-wise-notes-level2/$', UnitWiseNotes_level2_View.as_view(), name='unit-wise-notes-level2'),
+    url(r'^video-lectures-level1/$', VideoLectures_level1_View.as_view(), name='video-lectures-level1'),
+    url(r'^video-lectures-level2/$', VideoLectures_level2_View.as_view(), name='video-lectures-level2'),
+    url(r'^unit-wise-ppt-level1/$', UnitWisePPT_level1_View.as_view(), name='unit-wise-ppt-level1'),
+    url(r'^unit-wise-ppt-level2/$', UnitWisePPT_level2_View.as_view(), name='unit-wise-ppt-level2'),
+    url(r'^UT-question-paper-level1/$', UTQuestionPaper_level1_View.as_view(), name='UT-question-paper-level1'),
+    url(r'^UT-question-paper-level2/$', UTQuestionPaper_level2_View.as_view(), name='UT-question-paper-level2'),
     # url(r'^previous-paper/$', PreviousPaperView.as_view(), name='previous-paper'),
     url(r'^fdps/$', FDPView.as_view(), name='fdps'),
     url(r'^students-workshop/$', StudentsWorkshopView.as_view(), name='students-workshop'),
@@ -37,5 +44,8 @@ urlpatterns = [
     url(r'^sharing_facultymember/$', Sharing_Of_FacultyMembers.as_view(), name='sharing_facultymember'),
     url(r'^event/$', Event_Page.as_view(), name='event'),
     url(r'^alumni-sharing/$', AluminiSharing.as_view(), name='alumni-sharing'),
+    # url(r'^medicinal-trees/$',Trees_medicinal.as_view(),name ='medicinal-trees'),
+    # url(r'^tree-description/$',Tree_Description.as_view(),name ='tree-description'),
+
 ]
 

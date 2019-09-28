@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{%static 'css/style.css' %}">
     <link rel="stylesheet" href="{%static 'css/animate.css' %}">
      <link rel="stylesheet" href="{%static 'css/header.css' %}">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poiret+One" rel="stylesheet">
@@ -18,16 +19,66 @@
     <!--navbar page-->
     <div class="container-fluid">
         {% include 'header.html' %}
-        {{ display_name|safe }}
+<div class="bg-light py-5">
+  <div class="container py-5" style="padding-top: 0px !important;">
+    <div class="row mb-4">
+      <div class="col-lg-5">
+        <h2 class="display-4 font-weight-light">Our team</h2>
+      </div>
+    </div>
 
-         <div class="col-lg-10 col-md-10 col-sm-12 mx-auto center_content" style="min-height:375px">
-{% if page %}
+    <div class="row text-center">
+      <!-- Team item-->
+        <div class="col-xl-6 col-sm-12 mb-5">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{%static 'image/vishalsir.jpg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">Vishal Baghel</h5><span class="small text-uppercase text-muted">Developer</span>
+          <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.facebook.com/vishal.baghel.5099"target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/bvishal8510"target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/bvishal8510" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/vishal-baghel-2595ab128/" target="_blank"class="social-link"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+        <div class="col-xl-6 col-sm-12 mb-5">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{%static 'image/sarthaksir.jpeg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">Sarthak Khatana</h5><span class="small text-uppercase text-muted">Designer</span>
+          <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.facebook.com/sarthak.khatana"target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/Sarthak23khatana"target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/s5ar_" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/sarthak-k-057a19146/" target="_blank"class="social-link"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xl-6 col-sm-12 mb-5">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{%static 'image/palak1.jpeg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">Palak Sharma</h5><span class="small text-uppercase text-muted">Developer</span>
+          <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.facebook.com/Palaksharma8840"target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/Sharma-palak/"target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/palak_8840" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/palak-sharma-31bb2517b/" target="_blank"class="social-link"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- End-->
 
-{{page.content|safe|escape}}
-{% else %}
-<p class="heading_text"> No content.</p>
-{% endif %}
- </div>
+      <!-- Team item-->
+      <div class="col-xl-6 col-sm-12 mb-5">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{%static 'image/mithilesh.jpg' %}" alt="" width="100" height="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">Mithilesh</h5><span class="small text-uppercase text-muted">Designer</span>
+          <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.facebook.com/methi40" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.github.com/methi40" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/mr_methi" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href=https://www.linkedin.com/in/methi40/ target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
          {% include 'footer.html' %}
         <!--jqery, bootstrap - plugons-->

@@ -11,7 +11,9 @@ from .forms import WorkshopRegistrationForm, EventRegistrationForm
 from .models import Page, Image, Presentation, Circular, PracticeSession, Poster, Files, QuestionPaper, \
     Video, Workshop, WorkshopRegistration, EventRegistration, Event, Charts,Notification,Image_Slider
 from uhvpe.settings.base import RECAPTCHA_PUBLIC_KEY, RECEIVER_EMAIL, EMAIL_HOST_USER
-
+from django.http import JsonResponse
+from django.core import serializers
+from django.forms.models import model_to_dict
 import json
 
 
@@ -88,33 +90,53 @@ class SyllabusView(View):
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files':files, 'images':images})
 
-class BookAndAuthorsView(View):
+class BookAndAuthors_level1_View(View):
     template_name = 'common_page.html'
 
     def get(self, request, *args, **kwargs):
-        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Book And Authors</b></span></h3></div>"
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Book And Authors For Second Year</b></span></h3></div>"
         page = Page.objects.filter(page_name='Book And Authors').first()
         files = Files.objects.filter(page=page)
         images = Image.objects.filter(page=page)
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files':files, 'images':images})
-
-class UnitWiseNotesView(View):
+class BookAndAuthors_level2_View(View):
     template_name = 'common_page.html'
 
     def get(self, request, *args, **kwargs):
-        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Unit Wise Notes</b></span> </h3></div>"
-        page = Page.objects.filter(page_name='Unit Wise Notes').first()
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Book And Authors For  Fourth Year</b></span></h3></div>"
+        page = Page.objects.filter(page_name='Book And AuthorsII').first()
         files = Files.objects.filter(page=page)
         images = Image.objects.filter(page=page)
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files':files, 'images':images})
 
-class VideoLecturesView(View):
+class UnitWiseNotes_level1_View(View):
     template_name = 'common_page.html'
 
     def get(self, request, *args, **kwargs):
-        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Video Lectures</b></span> </h3></div>"
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Unit Wise Notes For Second Year</b></span> </h3></div>"
+        page = Page.objects.filter(page_name='Unit Wise Notes').first()
+        files = Files.objects.filter(page=page)
+        images = Image.objects.filter(page=page)
+        return render(request, self.template_name, context={'page': page, 'display_name': display_name,
+                                                            'files':files, 'images':images})
+class UnitWiseNotes_level2_View(View):
+    template_name = 'common_page.html'
+
+    def get(self, request, *args, **kwargs):
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Unit Wise Notes For Fourth Year</b></span> </h3></div>"
+        page = Page.objects.filter(page_name='Unit Wise NotesII').first()
+        files = Files.objects.filter(page=page)
+        images = Image.objects.filter(page=page)
+        return render(request, self.template_name, context={'page': page, 'display_name': display_name,
+                                                            'files':files, 'images':images})
+
+class VideoLectures_level1_View(View):
+    template_name = 'common_page.html'
+
+    def get(self, request, *args, **kwargs):
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Video Lectures For Second Year</b></span> </h3></div>"
         page = Page.objects.filter(page_name='Video Lectures').first()
         files = Files.objects.filter(page=page)
         images = Image.objects.filter(page=page)
@@ -122,23 +144,54 @@ class VideoLecturesView(View):
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files':files, 'images':images, 'videos':videos})
 
-class UnitWisePPTView(View):
+class VideoLectures_level2_View(View):
     template_name = 'common_page.html'
 
     def get(self, request, *args, **kwargs):
-        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Unit Wise PPT</b></span> </h3></div>"
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Video Lectures For Fourth Year</b></span> </h3></div>"
+        page = Page.objects.filter(page_name='Video LecturesII').first()
+        files = Files.objects.filter(page=page)
+        images = Image.objects.filter(page=page)
+        videos = Video.objects.filter(page=page)
+        return render(request, self.template_name, context={'page': page, 'display_name': display_name,
+                                                            'files':files, 'images':images, 'videos':videos})
+
+class UnitWisePPT_level1_View(View):
+    template_name = 'common_page.html'
+
+    def get(self, request, *args, **kwargs):
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Unit Wise PPT For Second Year</b></span> </h3></div>"
         page = Page.objects.filter(page_name='Unit Wise PPT').first()
         files = Files.objects.filter(page=page)
         images = Image.objects.filter(page=page)
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files':files, 'images':images})
-
-class UTQuestionPaperView(View):
+class UnitWisePPT_level2_View(View):
     template_name = 'common_page.html'
 
     def get(self, request, *args, **kwargs):
-        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>UT Question Paper</b></span> </h3></div>"
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Unit Wise PPT For Fourth Year</b></span> </h3></div>"
+        page = Page.objects.filter(page_name='Unit Wise PPTII').first()
+        files = Files.objects.filter(page=page)
+        images = Image.objects.filter(page=page)
+        return render(request, self.template_name, context={'page': page, 'display_name': display_name,
+                                                            'files':files, 'images':images})
+class UTQuestionPaper_level1_View(View):
+    template_name = 'common_page.html'
+
+    def get(self, request, *args, **kwargs):
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>UT Question Paper For Second Year </b></span> </h3></div>"
         page = Page.objects.filter(page_name='UT Question Paper').first()
+        files = Files.objects.filter(page=page)
+        images = Image.objects.filter(page=page)
+        return render(request, self.template_name, context={'page': page, 'display_name': display_name,
+                                                            'files':files, 'images':images})
+class UTQuestionPaper_level2_View(View):
+    template_name = 'common_page.html'
+
+    def get(self, request, *args, **kwargs):
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>UT Question Paper For Fourth Year</b></span> </h3></div>"
+        page = Page.objects.filter(page_name='UT Question PaperII').first()
         files = Files.objects.filter(page=page)
         images = Image.objects.filter(page=page)
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
@@ -378,11 +431,6 @@ class Event_Page(View):
             return render(request, self.template_name, context={'event':dict,'display_name': display_name,})
 
 
-
-
-
-
-
 class Sharing_Of_Students(View):
     template_name = 'common_page.html'
 
@@ -418,7 +466,25 @@ class AluminiSharing(View):
 
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files': files, 'images': images, })
-
+#
+# class Tree_Description(View):
+#
+#     def get(self,request,*args,**kwargs):
+#         print("ajax form")
+#         tree_id = request.GET['tree_id']
+#         print(tree_id)
+#         tree = Medicinal_Trees.objects.filter(id=tree_id)
+#         data = serializers.serialize('json', list(tree), fields=('name', 'description'))
+#         print(data)
+#         return JsonResponse(data,safe=False)
+#
+#
+# class Trees_medicinal(View):
+#     template_name = 'medicinal-trees.html'
+#     def get(self,request,*args,**kwargs):
+#         display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Medicinal Trees</b></span> </h3></div>"
+#         trees_detail = Medicinal_Trees.objects.all()
+#         return render(request,self.template_name,context={'display_name':display_name,'trees_detail':trees_detail})
 
 
 def view404(request,*args,**kwargs):
@@ -430,6 +496,10 @@ def view500(request,*args,**kwargs):
     error_code = 500
     error_message = 'Internal Server Error'
     return render(request, 'Error.html', {'error_code':error_code, 'error_message':error_message})
+
+
+
+
 
 
 
