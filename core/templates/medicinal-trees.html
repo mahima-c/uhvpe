@@ -1,0 +1,414 @@
+{% load staticfiles %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Medicinal Plants</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link href="css/resCarousel.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{%static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+    <link rel="stylesheet" href="{%static 'css/slider.css' %}">
+    <link rel="stylesheet" href="{%static 'css/header.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong:300,400,400i,500,600,700" />
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poiret+One" rel="stylesheet">
+    <style>
+.selected{
+   border:solid 5px #d7d7d7;
+   margin:10px;
+   border-radius:7%;
+}
+<!--.card{-->
+<!--   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);-->
+<!--   transition: 0.3s;-->
+<!--   border-radius:1rem !important;-->
+<!--}-->
+
+    </style>
+</head>
+
+<body>
+    <!--home-->
+    <div class="container-fluid" >
+      {% include 'header.html' %}
+      {{ display_name|safe }}
+    </div>
+      {% if trees_detail %}
+    <div class="container p8">
+        <div class="resCarousel" data-items="1-7-7-7" data-interval="2000" >
+            <div class="resCarousel-inner">
+                {% for images in trees_detail %}
+                 <a onclick="changeImg({{images.id}});" data-catid="{{image.id}}" class="tree" >
+                <div class="item" id="img-scroll{{images.id}}">
+                    <div class="tile" >
+                        <div class="image" style=" background: url('{{media_link}}{{images.image.url}}');
+                        background-size: cover; height: 150px; width: 150px; ">
+                        </div>
+
+                    </div>
+                    <h3>{{images.name}}</h3>
+
+                </div>
+                 </a>
+                {% endfor %}
+            </div>
+            <button class='btn btn-default leftRs'><</button>
+            <button class='btn btn-default rightRs'>></button>
+
+        </div>
+    </div>
+
+    <div class="card" style="">
+      <div class="card-body">
+          <div id="ck_img">
+        <h2 class="card-title" id="treename"></h2>
+<!--        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+        <p class="card-text" id="description"></p>
+
+          </div>
+      </div>
+
+    </div>
+     {% else %}
+    <div style="line-height:30em;">
+     <p class="heading_text"style="text-align:center;">No content </p>
+    </div>
+    {% endif %}
+   {% include 'footer.html' %}
+</body>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>
+        //ResCarouselCustom();
+        var pageRefresh = true;
+
+        function ResCarouselCustom() {
+            var items = $("#dItems").val(),
+                slide = $("#dSlide").val(),
+                speed = $("#dSpeed").val(),
+                interval = $("#dInterval").val()
+
+            var itemsD = "data-items=\"" + items + "\"",
+                slideD = "data-slide=\"" + slide + "\"",
+                speedD = "data-speed=\"" + speed + "\"",
+                intervalD = "data-interval=\"" + interval + "\"";
+
+
+            var atts = "";
+            atts += items != "" ? itemsD + " " : "";
+            atts += slide != "" ? slideD + " " : "";
+            atts += speed != "" ? speedD + " " : "";
+            atts += interval != "" ? intervalD + " " : ""
+
+            //console.log(atts);
+
+            var dat = "";
+            dat += '<h4 >' + atts + '</h4>'
+            dat += '<div class=\"resCarousel\" ' + atts + '>'
+            dat += '<div class="resCarousel-inner">'
+            for (var i = 1; i <= 14; i++) {
+                dat += '<div class=\"item\"><div><h1>' + i + '</h1></div></div>'
+            }
+            dat += '</div>'
+            dat += '<button class=\'btn btn-default leftRs\'><i class=\"fa fa-fw fa-angle-left\"></i></button>'
+            dat += '<button class=\'btn btn-default rightRs\'><i class=\"fa fa-fw fa-angle-right\"></i></button>    </div>'
+            console.log(dat);
+            $("#customRes").html(null).append(dat);
+
+            if (!pageRefresh) {
+                ResCarouselSize();
+            } else {
+                pageRefresh = false;
+            }
+            //ResCarouselSlide();
+        }
+
+        $("#eventLoad").on('ResCarouselLoad', function() {
+            //console.log("triggered");
+            var dat = "";
+            var lenghtI = $(this).find(".item").length;
+            if (lenghtI <= 30) {
+                for (var i = lenghtI; i <= lenghtI + 10; i++) {
+                    dat += '<div class="item"><div class="tile"><div><h1>' + (i + 1) + '</h1></div><h3>Title</h3><p>content</p></div></div>'
+                }
+                $(this).append(dat);
+            }
+        });
+    </script>
+    <script src="js/resCarousel.js"></script>
+    <script type="text/javascript">
+        //resCarousel
+$(document).ready(function() { ResCarouselOnInit(); });
+
+$(window).resize(function() {
+    var r = new Date();
+    setTimeout(function() {
+        ResCarouselResize(r);
+    }, 200);
+});
+
+function ResCarouselOnInit() {
+    ResCarouselSize();
+    $(document).on('click', '.leftRs, .rightRs', function() {
+        ResCarousel(this);
+    });
+    $(document).on("mouseenter", ".ResHover", function() {
+        $(this).addClass("ResHovered");
+    });
+
+    $(document).on("mouseleave", ".ResHover", function() {
+        $(this).removeClass("ResHovered");
+    });
+}
+
+// Rescarousel Auto Slide
+function ResCarouselSlide(e) {
+    var thiss = $(e).find(".rightRs");
+    var dataInterval = $(e).attr('data-interval');
+    !isNaN(dataInterval) && $(e).addClass("ResHover") && setInterval(function() {
+        !(thiss.parent().hasClass("ResHovered")) && ResCarousel(thiss);
+    }, +(dataInterval));
+}
+
+function ResCarouselResize() {
+    function myfunction() {
+        console.log("resize Works");
+        //var r = $('body').width();
+        $('.resCarousel').each(function() {
+            var divValue = $(this).attr('data-value');
+            var itemWidth = $(this).find('.item').width();
+            $(this).find(".resCarousel-inner").scrollLeft(divValue * itemWidth);
+            //var itemsSplit = $(this).attr("data-items").split(',');
+            //var it = r >= 1200 ? itemsSplit[3] : r >= 992 ? itemsSplit[2] : r >= 768 ? itemsSplit[1] : itemsSplit[0];
+            //$(this).attr("data-itm", it);
+        });
+    }
+    //var ResTimeout = setTimeout(function() { myfunction() }, 3000);
+    //clearTimeout(ResTimeout);
+    //ResTimeout = setTimeout(function() { myfunction() }, 3000);
+    //console.log(ResTimeout);
+    myfunction();
+}
+
+//this function define the size of the items
+function ResCarouselSize() {
+    var t0 = performance.now();
+
+    //    styleCollector0 = styleCollector1 = styleCollector2 = styleCollector3 = "";
+    $('.resCarousel').each(function(index) {
+        var itemsSplit = $(this).attr("data-items").split('-');
+<!--        $(this).addClass("ResSlid" + index);-->
+
+        for (var i = 0; i < 4; i++) {
+            if (i == 0) {
+                var styleCollector0 = ".ResSlid" + index + " .item {width: " + 100 / itemsSplit[i] + "%}";
+            } else if (i == 1) {
+                var styleCollector1 = ".ResSlid" + index + " .item {width: " + 100 / itemsSplit[i] + "%}";
+            } else if (i == 2) {
+                var styleCollector2 = ".ResSlid" + index + " .item {width: " + 100 / itemsSplit[i] + "%}";
+            } else if (i == 3) {
+                var styleCollector3 = ".ResSlid" + index + " .item {width: " + 100 / itemsSplit[i] + "%}";
+            }
+        }
+
+
+        var styleCollector = "@media (max-width:767px){" + styleCollector0 + "}" +
+            "@media (min-width:768px){" + styleCollector1 + "}" +
+            "@media (min-width:992px){" + styleCollector2 + "}" +
+            "@media (min-width:1200px){" + styleCollector3 + "}";
+        //$(this).append("<div class=\"ResStyleManager\"></div>")
+        $(this).find("style").remove();
+        $(this).append("<style>" + styleCollector + "</style>");
+        ResCarouselSlide(this);
+
+    });
+
+    //$("body").append("<div class=\"ResStyleManager\"></div>")
+    //$('.ResStyleManager').html(null).append("<style>" + styleCollector + "</style>");
+    var t1 = performance.now();
+    console.log('Took', (t1 - t0).toFixed(4), 'milliseconds to Size');
+}
+
+//this function used to move the items
+function ResCarousel(Btn) {
+    //var t0 = performance.now();
+    var parent = $(Btn).parent(),
+        slide = +parent.attr("data-slide"),
+        itemsDiv = parent.find('.resCarousel-inner'),
+        //divValueq = +parent.attr('data-value'),
+        itemSpeed = +parent.attr("data-speed"),
+        itemLoad = +parent.attr("data-load"),
+        //animi = parent.attr("data-animator"),
+        translateXval = '',
+        currentSlide = "",
+        itemLenght = itemsDiv.find(".item").length,
+        itemWidth = itemsDiv.find('.item').outerWidth(),
+        dataItm = +Math.round(itemsDiv.outerWidth() / itemWidth),
+        cond = $(Btn).hasClass("leftRs"),
+        divValue = Math.round(itemsDiv.scrollLeft() / itemWidth);
+
+    itemSpeed = !isNaN(itemSpeed) ? itemSpeed : 400;
+    slide = slide < dataItm ? slide : dataItm;
+
+    if (cond) {
+        currentSlide = divValue - slide;
+        translateXval = currentSlide * itemWidth;
+        var MoveSlide = currentSlide + slide;
+
+        if (divValue == 0) {
+            currentSlide = itemLenght - slide;
+            translateXval = currentSlide * itemWidth;
+            currentSlide = itemLenght - dataItm;
+            itemSpeed = 400;
+
+        } else if (slide >= MoveSlide) {
+            currentSlide = translateXval = 0;
+        }
+    } else {
+        currentSlide = divValue + slide;
+        translateXval = currentSlide * itemWidth;
+        var MoveSlide = currentSlide + slide;
+
+        if (divValue + dataItm == itemLenght) {
+            currentSlide = translateXval = 0;
+            itemSpeed = 400;
+        } else if (itemLenght <= (MoveSlide - slide + dataItm)) {
+            currentSlide = itemLenght - slide;
+            translateXval = currentSlide * itemWidth;
+            currentSlide = itemLenght - dataItm;
+        }
+        // resCarouselAnimator(itemsDiv, currentSlide + 1, currentSlide + slide);
+    }
+
+    parent.attr("data-animator") == "lazy" && resCarouselAnimator(itemsDiv, cond ? 0 : 1, currentSlide + 1, currentSlide + dataItm, itemSpeed, (slide * itemWidth));
+
+    if (!isNaN(itemLoad)) {
+        itemLoad = itemLoad >= slide ? itemLoad : slide;
+
+        (itemLenght - itemLoad) <= (currentSlide + dataItm) && ResCarouselLoad1(itemsDiv);
+    }
+    itemsDiv.animate({ scrollLeft: translateXval }, itemSpeed);
+    parent.attr("data-value", currentSlide);
+
+    //var t1 = performance.now();
+
+}
+
+
+function ResCarouselLoad1(e) {
+
+    $("#" + e.attr("id")).trigger("ResCarouselLoad");
+}
+
+function resCarouselAnimator(parent, direction, start, end, speed, length) {
+
+    var val = 5;
+    if (direction == 0) {
+        for (var i = start - 1; i < end + 1; i++) {
+            val = val * 2;
+        }
+        val = -val;
+    }
+
+    for (var i = start - 1; i < end; i++) {
+        val = direction == 0 ? val / 2 : val * 2;
+
+        // parent.find(".item").eq(i).css("transform", "translateX(" + val + "px)");
+    }
+    setTimeout(function() {
+        parent.find(".item").attr("style", "");
+    }, speed - 70);
+}
+    </script>
+<script>
+        $(document).ready(function() {
+          changeImg({{first_tree.id}});
+        });
+      </script>
+<script>
+
+
+function changeImg(tree_id) {
+    var catid;
+    catid = tree_id;
+    $.ajax(
+    {
+        url: "{% url 'tree-description' %}",
+        data:{
+                 tree_id: catid
+        },
+        dataType: "json",
+        success: function( data )
+        {
+          console.log(data);
+
+          var jsonData = JSON.parse(data);
+<!--          console.log(jsonData[0]['fields']['name']);-->
+           $("#treename").html(jsonData[0]['fields']['name']);
+            $("#description").html(jsonData[0]['fields']['description']);
+            $('.item').removeClass('selected');
+            var d= "#img-scroll"+tree_id;
+             $(d).addClass('selected');
+
+
+        }
+     });
+
+}
+</script>
+    <script>
+        $(function () {
+            $('#main_navbar').bootnavbar();
+        })
+    </script>
+    <script type="text/javascript">
+        (function($) {
+    var defaults={
+        sm : 540,
+        md : 720,
+        lg : 960,
+        xl : 1140,
+        navbar_expand: 'lg'
+    };
+    $.fn.bootnavbar = function() {
+
+        var screen_width = $(document).width();
+
+        if(screen_width >= defaults.lg){
+            $(this).find('.dropdown').hover(function() {
+                $(this).addClass('show');
+                $(this).find('.dropdown-menu').first().addClass('show').addClass('animated fadeIn').one('animationend oAnimationEnd mozAnimationEnd webkitAnimationEnd', function () {
+                    $(this).removeClass('animated fadeIn');
+                });
+            }, function() {
+                $(this).removeClass('show');
+                $(this).find('.dropdown-menu').first().removeClass('show');
+            });
+        }
+
+        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+          if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+          }
+          var $subMenu = $(this).next(".dropdown-menu");
+          $subMenu.toggleClass('show');
+
+          $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+            $('.dropdown-submenu .show').removeClass("show");
+          });
+
+          return false;
+        });
+    };
+})(jQuery);
+    </script>
+
+</html>

@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail, EmailMessage
 from .forms import WorkshopRegistrationForm, EventRegistrationForm
 from .models import Page, Image, Presentation, Circular, PracticeSession, Poster, Files, QuestionPaper, \
-    Video, Workshop, WorkshopRegistration, EventRegistration, Event, Charts,Notification,Image_Slider
+    Video, Workshop, WorkshopRegistration, EventRegistration, Event, Charts,Notification,Image_Slider,Medicinal_Trees
 from uhvpe.settings.base import RECAPTCHA_PUBLIC_KEY, RECEIVER_EMAIL, EMAIL_HOST_USER
 from django.http import JsonResponse
 from django.core import serializers
@@ -466,25 +466,23 @@ class AluminiSharing(View):
 
         return render(request, self.template_name, context={'page': page, 'display_name': display_name,
                                                             'files': files, 'images': images, })
-#
-# class Tree_Description(View):
-#
-#     def get(self,request,*args,**kwargs):
-#         print("ajax form")
-#         tree_id = request.GET['tree_id']
-#         print(tree_id)
-#         tree = Medicinal_Trees.objects.filter(id=tree_id)
-#         data = serializers.serialize('json', list(tree), fields=('name', 'description'))
-#         print(data)
-#         return JsonResponse(data,safe=False)
-#
-#
-# class Trees_medicinal(View):
-#     template_name = 'medicinal-trees.html'
-#     def get(self,request,*args,**kwargs):
-#         display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Medicinal Trees</b></span> </h3></div>"
-#         trees_detail = Medicinal_Trees.objects.all()
-#         return render(request,self.template_name,context={'display_name':display_name,'trees_detail':trees_detail})
+
+class Tree_Description(View):
+
+    def get(self,request,*args,**kwargs):
+        tree_id = request.GET['tree_id']
+        tree = Medicinal_Trees.objects.filter(id=tree_id)
+        data = serializers.serialize('json', list(tree), fields=('name', 'description'))
+        return JsonResponse(data,safe=False)
+
+
+class Trees_medicinal(View):
+    template_name = 'medicinal-trees.html'
+    def get(self,request,*args,**kwargs):
+        display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Medicinal Trees</b></span> </h3></div>"
+        trees_detail = Medicinal_Trees.objects.all()
+        first_tree = Medicinal_Trees.objects.order_by('id')[0]
+        return render(request,self.template_name,context={'display_name':display_name,'trees_detail':trees_detail,'first_tree':first_tree})
 
 
 def view404(request,*args,**kwargs):
@@ -496,6 +494,7 @@ def view500(request,*args,**kwargs):
     error_code = 500
     error_message = 'Internal Server Error'
     return render(request, 'Error.html', {'error_code':error_code, 'error_message':error_message})
+
 
 
 

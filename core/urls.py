@@ -6,7 +6,7 @@ from .views import (IndexView, DirectorMessageView, VisionAndMissionView, Establ
                     FDPView, StudentsWorkshopView, EventsView, ClubsView,
                     ImpactStudentView, ImpactFacultyView, SaveContactView,Developer_View,Nature_Club_About,
                     Nature_Club_Activity, Health_Club_About, Health_Club_Activity, Event_Page,
-                    Sharing_Of_FacultyMembers,Sharing_Of_Students,AluminiSharing)
+                    Sharing_Of_FacultyMembers,Sharing_Of_Students,AluminiSharing,Trees_medicinal,Tree_Description)
                     
 
 urlpatterns = [
@@ -44,8 +44,8 @@ urlpatterns = [
     url(r'^sharing_facultymember/$', Sharing_Of_FacultyMembers.as_view(), name='sharing_facultymember'),
     url(r'^event/$', Event_Page.as_view(), name='event'),
     url(r'^alumni-sharing/$', AluminiSharing.as_view(), name='alumni-sharing'),
-    # url(r'^medicinal-trees/$',Trees_medicinal.as_view(),name ='medicinal-trees'),
-    # url(r'^tree-description/$',Tree_Description.as_view(),name ='tree-description'),
-
+    url(r'^medicinal-trees/$',Trees_medicinal.as_view(),name ='medicinal-trees'),
+    url(r'^tree-description/$',Tree_Description.as_view(),name ='tree-description'),
 ]
+
 

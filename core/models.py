@@ -178,4 +178,10 @@ class Notification(models.Model):
     def __str__(self):
         return self.name
 
+class Medicinal_Trees(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='trees/',unique=True)
+    description = RichTextUploadingField(blank=True)
+    def __str__(self):
+        return self.name
 
