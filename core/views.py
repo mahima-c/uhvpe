@@ -481,7 +481,10 @@ class Trees_medicinal(View):
     def get(self,request,*args,**kwargs):
         display_name = "<div class='col-lg-12 mx-auto '><h3 class=' my-2'><span class='about-us'><b>Medicinal Trees</b></span> </h3></div>"
         trees_detail = Medicinal_Trees.objects.all()
-        first_tree = Medicinal_Trees.objects.order_by('id')[0]
+        if(trees_detail):
+           first_tree = Medicinal_Trees.objects.order_by('id')[0]
+        else:
+            first_tree = None
         return render(request,self.template_name,context={'display_name':display_name,'trees_detail':trees_detail,'first_tree':first_tree})
 
 
@@ -494,6 +497,9 @@ def view500(request,*args,**kwargs):
     error_code = 500
     error_message = 'Internal Server Error'
     return render(request, 'Error.html', {'error_code':error_code, 'error_message':error_message})
+
+
+
 
 
 

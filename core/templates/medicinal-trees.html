@@ -61,8 +61,8 @@
                  </a>
                 {% endfor %}
             </div>
-            <button class='btn btn-default leftRs'><</button>
-            <button class='btn btn-default rightRs'>></button>
+            <button id="lsbtn" class='btn btn-default leftRs'><</button>
+            <button id="rsbtn" class='btn btn-default rightRs'>></button>
 
         </div>
     </div>
@@ -329,9 +329,11 @@ function resCarouselAnimator(parent, direction, start, end, speed, length) {
 }
     </script>
 <script>
+      {% if trees_detail %}
         $(document).ready(function() {
           changeImg({{first_tree.id}});
         });
+        {% endif %}
       </script>
 <script>
 

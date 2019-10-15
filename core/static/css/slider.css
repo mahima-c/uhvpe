@@ -158,10 +158,10 @@
     .container{
      margin-top:20% !important;
     }
-    button {
+    #lsbtn{
     display:none !important;
     }
-    button {
+    #rsbtn{
     display:none !important;
     }
 }

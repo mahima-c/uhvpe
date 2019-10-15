@@ -196,8 +196,8 @@ max-height:35vh !important;
   color: #000;
   position: absolute;
   z-index: 2;
-  margin-left: 50px;
-  margin-top: 50px;
+  margin-left:50px;
+  margin-top: 25px;
 }
 
 
@@ -353,7 +353,7 @@ padding-bottom:0rem;
     border-radius: 10px;
   }
   .center_content{
-    margin-top: 150px;
+    margin-top:80px;
     text-justify: inter-word;
     /* text-align: center; */
   }

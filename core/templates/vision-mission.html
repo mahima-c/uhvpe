@@ -23,6 +23,16 @@
     .para{
         height: 23vh;
     }
+    .card{
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      padding:2%;
+      border-radius:1rem !important;
+      background:#fff;
+    }
+    .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
     </style>
 </head>
 <body>
@@ -31,26 +41,30 @@
         {% include 'header.html' %}
         {{ display_name|safe }}
 
-         <div class="col-lg-12 col-md-12 col-sm-12 mx-auto center_content" style="min-height:375px">
-             <div class="row mx-auto" id="">
+         <div class="col-lg-12 col-md-12 col-sm-12 mx-auto center_content">
+             <div class="row mx-auto" id="cardbody" style="margin:0 0 30px 0;">
 
             <div class="col-lg-6 col-sm-12 my-2 about-text mx-auto ">
+                <div class="card">
                 <h1 class=" my-2"><span class="">Vision</span></h1>
-                <p class="para"><i class="fas fa-feather-alt" style="font-size:24px; margin-right:10px;"></i>To be a center of spreading and facilitating
+                <p style="font-size:16pt !important;" class="para"><i class="fas fa-feather-alt" style="font-size:24px; margin-right:10px;"></i>To be a center of spreading and facilitating
                     Value Education around the globeso that a common holistic vision based on harmony could be ensured
                     in present and future generation.
                 </p>
                 </div>
+            </div>
 
             <div class=" col-lg-12 mx-auto ">
             </div>
             <div class="col-lg-6 col-sm-12 my-2 about-text mx-auto ">
+                <div class="card" style="">
                 <h1 class=" my-2"><span class="">Mission</span></h1>
-                <p class="para"><i class="fas fa-feather-alt" style="font-size:24px; margin-right:10px;"></i>To prepare students with a holistic vision including
+                <p style="font-size:16pt !important;" class="para" style="height:20vh;"><i class="fas fa-feather-alt" style="font-size:24px; margin-right:10px;"></i>To prepare students with a holistic vision including
                     family, society and rest of Nature while learning skills so that students may be able to live and
                     work in a harmonious manner in all dimensions of their living.
                 </p>
                 </div>
+            </div>
         </div>
 <!--{% if page %}-->
 
